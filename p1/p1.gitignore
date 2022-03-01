@@ -1,4 +1,2 @@
 *.exe
-
-#linux executable binaries: 
-p1/bin/
+reverse
