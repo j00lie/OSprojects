@@ -1,4 +1,4 @@
 *.exe
 
 #linux executable binaries: 
-bin/
+p1/bin/
