@@ -1,1 +1,4 @@
 *.exe
+
+#linux executable binaries: 
+bin/
