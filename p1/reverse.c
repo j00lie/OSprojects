@@ -5,7 +5,7 @@
 typedef struct line
 {
     struct line *pNext;
-    char line[];
+    char *line;
 } LINE;
 
 // Create new node to represent a line
@@ -16,52 +16,121 @@ LINE *newLine()
     return new;
 }
 
-LINE *readFile()
+LINE *readFile(char *argv)
 {
     FILE *f;
     char *buffer; // line here
     size_t bufsize = 32;
     size_t line;
-    LINE *pStart = NULL, *ptr = NULL, *pNew;
+    LINE *pStart = NULL, *ptr = NULL, *node;
 
     buffer = (char *)malloc(bufsize * sizeof(char));
-    f = fopen("input.txt", "r");
+    if (buffer == NULL)
+    {
+        fprintf(stderr, "malloc failed\n");
+        exit(1);
+    }
+    f = fopen(argv, "r");
+    if (f == NULL)
+    {
+        fprintf(stderr, "error: cannot open file %s\n", argv);
+        exit(1);
+    }
     while (line = getline(&buffer, &bufsize, f) != -1)
     {
+        node = newLine();
+        node->line = strdup(buffer);
+
         if (pStart == NULL)
         {
-            pStart = newLine();
-            strcpy(pStart->line, buffer);
-            // printf("rivi: %s", ptr->line);
-            ptr = pStart;
+            ptr = pStart = node;
         }
         else
         {
-            pNew = newLine();
-            ptr->pNext = pNew;
-            strcpy(pNew->line, buffer);
-            ptr = ptr->pNext;
+            ptr = ptr->pNext = node;
         }
     }
 
     fclose(f);
-    free(ptr);
+    free(buffer);
+
     return pStart;
 }
-void printList(LINE *ptr)
+void writeOutput(LINE *pStart, char *argv)
 {
-    while (ptr != NULL)
+    LINE *ptr = pStart;
+    FILE *f;
+    if (strcmp(argv, "stdout") != 0) // check if outputstream is stdout or not
     {
-        printf("%s\n", ptr->line);
-        ptr = ptr->pNext;
+        f = fopen(argv, "w");
+        while (ptr != NULL)
+        {
+            fprintf(f, "%s\n", ptr->line);
+            ptr = ptr->pNext;
+        }
+        fclose(f);
+    }
+    else
+    {
+        while (ptr != NULL)
+        {
+            fprintf(stdout, "%s\n", ptr->line);
+            ptr = ptr->pNext;
+        }
     }
 }
-
-int main(void)
+void reverseInput(LINE **pStart)
 {
-    LINE *ptr = NULL;
-    ptr = readFile(ptr);
-    printList(ptr);
-    free(ptr);
+
+    if (pStart == NULL)
+    {
+        return;
+    }
+    LINE *first = *pStart;
+    LINE *rest = first->pNext;
+    if (rest == NULL)
+    {
+        return;
+    }
+
+    reverseInput(&rest);
+    first->pNext->pNext = first;
+    first->pNext = NULL;
+    *pStart = rest;
+}
+
+int main(int argc, char *argv[])
+{
+    LINE *pStart = NULL;
+    // argv[1] = input.txt & argv[2] = output.txt
+
+    if (argc == 3) // write input file to output file in reverse order
+    {
+
+        if (strcmp(argv[1], argv[2]) == 0) // check that input and output files are not the same
+        {
+            fprintf(stderr, "Input and output file must differ\n");
+            exit(1);
+        }
+        pStart = readFile(argv[1]);
+        reverseInput(&pStart);
+        writeOutput(pStart, argv[2]);
+    }
+    else if (argc == 2) // In absence of output file print reverse order to stdout
+    {
+        pStart = readFile(argv[1]);
+        reverseInput(&pStart);
+        writeOutput(pStart, "stdout");
+    }
+    else if (argc == 1)
+    {
+        // read from stdin and write to stdout
+    }
+    else if (argc > 3)
+    {
+        fprintf(stderr, " usage: reverse <input> <output>\n");
+        exit(1);
+    }
+    free(pStart);
     return 0;
 }
