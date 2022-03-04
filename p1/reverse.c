@@ -30,14 +30,28 @@ LINE *readFile(char *argv)
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
-    f = fopen(argv, "r");
-    if (f == NULL)
+
+    if (strcmp(argv, "stdin") != 0)
     {
-        fprintf(stderr, "error: cannot open file %s\n", argv);
-        exit(1);
+        f = fopen(argv, "r");
+        if (f == NULL)
+        {
+            fprintf(stderr, "error: cannot open file %s\n", argv);
+            exit(1);
+        }
     }
+    else
+    {
+        f = stdin;
+        printf("Enter lines ('exit' to stop): \n");
+    }
+
     while (line = getline(&buffer, &bufsize, f) != -1)
     {
+        if (strcmp(buffer, "exit\n") == 0)
+        {
+            break;
+        }
         node = newLine();
         node->line = strdup(buffer);
 
@@ -63,23 +77,19 @@ void writeOutput(LINE *pStart, char *argv)
     if (strcmp(argv, "stdout") != 0) // check if outputstream is stdout or not
     {
         f = fopen(argv, "w");
-        while (ptr != NULL)
-        {
-            fprintf(f, "%s\n", ptr->line);
-            ptr = ptr->pNext;
-        }
-        fclose(f);
     }
     else
     {
-        while (ptr != NULL)
-        {
-            fprintf(stdout, "%s\n", ptr->line);
-            ptr = ptr->pNext;
-        }
+        f = stdout;
     }
+    while (ptr != NULL)
+    {
+        fprintf(f, "%s\n", ptr->line);
+        ptr = ptr->pNext;
+    }
+    fclose(f);
 }
-void reverseInput(LINE **pStart)
+void reverseInput(LINE **pStart) // recursive function to reverse linked list
 {
 
     if (pStart == NULL)
@@ -122,9 +132,11 @@ int main(int argc, char *argv[])
         reverseInput(&pStart);
         writeOutput(pStart, "stdout");
     }
-    else if (argc == 1)
+    else if (argc == 1) // read from stdin and write to stdout
     {
-        // read from stdin and write to stdout
+        pStart = readFile("stdin");
+        reverseInput(&pStart);
+        writeOutput(pStart, "stdout");
     }
     else if (argc > 3)
     {
