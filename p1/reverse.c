@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,14 +25,14 @@ LINE *readFile(char *argv)
     size_t line;
     LINE *pStart = NULL, *ptr = NULL, *node;
 
-    buffer = (char *)malloc(bufsize * sizeof(char));
+    buffer = (char *)malloc(bufsize * sizeof(char)); // allocate memory for buffer
     if (buffer == NULL)
     {
         fprintf(stderr, "malloc failed\n");
         exit(1);
     }
 
-    if (strcmp(argv, "stdin") != 0)
+    if (strcmp(argv, "stdin") != 0) // check if input from file or stdin
     {
         f = fopen(argv, "r");
         if (f == NULL)
@@ -46,14 +47,14 @@ LINE *readFile(char *argv)
         printf("Enter lines ('exit' to stop): \n");
     }
 
-    while (line = getline(&buffer, &bufsize, f) != -1)
+    while (line = getline(&buffer, &bufsize, f) != -1) // read lines stop at EOF
     {
         if (strcmp(buffer, "exit\n") == 0)
         {
             break;
         }
         node = newLine();
-        node->line = strdup(buffer);
+        node->line = strdup(buffer); // Copy content of line to node of linked list
 
         if (pStart == NULL)
         {
