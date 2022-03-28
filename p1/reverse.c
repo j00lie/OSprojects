@@ -110,7 +110,7 @@ void reverseInput(LINE **pStart) // recursive function to reverse linked list
     first->pNext = NULL;
     *pStart = rest;
 }
-void iterReverse(LINE **pStart) // iterative function to reverse linked list
+void iterReverse(LINE **pStart) // iterative function to reverse linked list: https://www.geeksforgeeks.org/reverse-a-linked-list/
 {
     LINE *prev = NULL;
     LINE *current = *pStart;
