@@ -8,7 +8,8 @@
    source string src */
 void encode(char* src){
     int rLen = 0;
-    char count[MAX_RLEN];
+    char count[MAX_RLEN] = "";
+    
     int len = strlen(src);
 
  
@@ -23,11 +24,12 @@ void encode(char* src){
             rLen++;
             i++;
         }
- 
         /* Store rLen in a character array count[] */
         sprintf(count, "%d", rLen);
-        fwrite(&count, sizeof(rLen),1,stdout);
+
+        fwrite(count, 4,1,stdout);
         fwrite(&src[i], 1, 1, stdout); 
+        
     }
  
 }
