@@ -9,18 +9,20 @@ void readFile(char *argv){
       exit(1);
    }
    while( fgets (str, 100, f)!=NULL ) {
-      printf("%s\n",str);
+      printf("%s",str);
    }
+   printf("\n");
    fclose(f);
 
 }
 
 int main(int argc, char *argv[]){
     int i = 1; 
-    while(argv[i] != NULL){
+    if(argc > 1){
+        while(argv[i] != NULL){
         readFile(argv[i]);
         i++; 
+        }
     }
-    
     return 0; 
 }
