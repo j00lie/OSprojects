@@ -17,8 +17,17 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
 
 ### Installation
 - My-cat:
-  - Download the [My-cat driver code](https://github.com/j00lie/OSprojects/blob/main/p1/reverse.c)
-  - Compile with: `gcc reverse.c -o example_executable -std=c99`
+  - Download the [My-cat driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-cat.c)
+  - Compile with: `gcc my-cat.c -o example_executable -Wall -Werror`
+- My-grep:
+  - Download the [My-grep driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-grep.c)
+  - Compile with: `gcc my-grep.c -o example_executable -Wall -Werror`
+ - My-zip:
+  - Download the [My-zip driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-zip.c)
+  - Compile with: `gcc my-zip.c -o example_executable -Wall -Werror`
+ - My-unzip:
+  - Download the [My-unzip driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-unzip.c)
+  - Compile with: `gcc my-unzip.c -o example_executable -Wall -Werror`
 
 ### Running the program
 - The program can be invoked in the following ways: 
