@@ -23,8 +23,8 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
   - Download the [My-grep driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-grep.c)
   - Compile with: `gcc my-grep.c -o example_executable -Wall -Werror`
  - My-zip:
-  - Download the [My-zip driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-zip.c)
-  - Compile with: `gcc my-zip.c -o example_executable -Wall -Werror`
+   - Download the [My-zip driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-zip.c)
+   - Compile with: `gcc my-zip.c -o example_executable -Wall -Werror`
  - My-unzip:
    - Download the [My-unzip driver code](https://github.com/j00lie/OSprojects/blob/main/p2/my-unzip.c)
    - Compile with: `gcc my-unzip.c -o example_executable -Wall -Werror`
