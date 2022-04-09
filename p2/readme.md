@@ -34,5 +34,9 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
   - `./my-cat file_1 (file_2..)`
 - my-grep:
   - `./my-grep search_term file_1 (file_2..)`
+- my-zip:
+  - `./my-zip file_1 (file_2..) > zipped_file.zip`
+- my-unzip:
+  - `./my-unzip file_1 (file_2..) 
 
 
