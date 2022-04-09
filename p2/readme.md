@@ -30,9 +30,9 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
    - Compile with: `gcc my-unzip.c -o example_executable -Wall -Werror`
 
 ### Running the program
-- The program can be invoked in the following ways: 
-- `./reverse` without any additional arguments the input stream is stdin and output stream is stdout.
--  `./reverse input.txt` with one additional argument the program recognizes the parameter as the input file.
--  `./reverse input.txt output.txt`With two command line arguments the first one designates the input file and the second is used as the output file. 
+- my-cat:
+  - `./my-cat file_1 (file_2)
+- my-grep:
+  - `./my-grep search_term file_1 file_2  
 
 
