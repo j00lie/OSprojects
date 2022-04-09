@@ -37,6 +37,6 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
 - my-zip:
   - `./my-zip file_1 (file_2..) > zipped_file.zip`
 - my-unzip:
-  - `./my-unzip file_1 (file_2..) 
+  - `./my-unzip file_1 (file_2..)`
 
 
