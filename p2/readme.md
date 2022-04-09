@@ -31,8 +31,8 @@ Command line utility resembling Unix utility unzip. Reads compressed input file(
 
 ### Running the program
 - my-cat:
-  - `./my-cat file_1 (file_2)
+  - `./my-cat file_1 (file_2..)`
 - my-grep:
-  - `./my-grep search_term file_1 file_2  
+  - `./my-grep search_term file_1 (file_2..)`
 
 
